@@ -1,0 +1,370 @@
+{% load static %}
+
+<!DOCTYPE html lang="en-US">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Account {{request.user.username}}</title>
+
+<link rel='stylesheet' id='reset-css' href="{% static 'css/reset.css' %}" type='text/css' media='all' />
+<link rel='stylesheet' id='superfish-css' href="{% static 'css/superfish.css' %}" type='text/css' media='all' />
+<link rel='stylesheet' id='fontawsome-css' href="{% static 'css/font-awsome/css/font-awesome.css' %}" type='text/css' media='all' />
+<link rel='stylesheet' id='orbit-css-css' href="{% static 'css/orbit.css' %}" type='text/css' media='all' />
+<link rel='stylesheet' id='style-css' href="{% static 'css/style.css' %}" type='text/css' media='all' />
+<link rel='stylesheet' id='color-scheme-css' href="{% static 'css/color/green.css' %}" type='text/css' media='all' />
+<link rel="stylesheet" href="{% static 'css/zerogrid.css' %}" type="text/css" media="screen">
+<link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" media="screen">
+<link rel='stylesheet' href="{% static 'css/table.css' %}"  type='text/css' />
+<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery-migrate.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/jquery.carouFredSel-6.2.1-packed.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/hoverIntent.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/superfish.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/orbit.min.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/comment-reply.min.js' %}"></script>
+<script src="{% static 'js/css3-mediaqueries.js' %}"></script>
+<script type="text/javascript" language="javascript">
+	$(function() {
+
+		/* Start Carousel */
+		$('#featured-posts').carouFredSel({
+			auto: true,
+					prev: '#prev2',
+					next: '#next2',
+		});
+		/* End Carousel */
+
+
+		/* Start Orbit Slider */
+		$(window).load(function() {
+			$('.post-gallery').orbit({
+				animation: 'fade',
+			});
+		});
+		/* End Orbit Slider */
+
+
+		/* Start Super fish */
+		jQuery(document).ready(function(){
+			jQuery('ul.sf-menu').superfish({
+				delay:         100,
+				speed:         'fast',
+				speedOut:      'fast',
+			});
+		});
+		/* End Of Super fish */
+
+	});
+</script>
+
+</head>
+
+<body class="page page-id-56 page-template-default">
+
+	<!-- Start Header -->
+    <div class="container zerogrid">
+        <div class="col-full">
+            <div class="wrap-col">
+        	    <div id="header-nav-container">
+                    <a href="#">
+                        <img src="{% static 'images/logo.svg' %}" width="150" height="50" id="logo" />
+                    </a>
+                    
+                <!-- Navigation Menu -->
+
+	                <ul class="sf-menu">
+                        <li class="menu-item">
+                            <a href="{% url 'ad_feed' %}">Главная</a>
+                        </li>
+                         {% if user.is_authenticated %}
+                        <li class="menu-item"><a href="{% url 'ad_create' %}">Создать объявление</a></li>
+                        <li class="menu-item current-menu-item"><a href="{% url 'user_accounts' %}">{{user.username}}</a></li>
+                        {% else %}
+                        <li class="menu-item current-menu-item"><a href="{% url 'account_login' %}">Вход</a></li>
+                        {% endif %}
+<!--                        <li class="menu-item">-->
+<!--                            <a href="blog.html">Blog</a>-->
+<!--                        </li>-->
+<!--                        <li class="menu-item">-->
+<!--                            <a href="#">Features</a>-->
+<!--                            <ul class="sub-menu">-->
+<!--                                <li class="menu-item"><a href="#">Menu 01</a></li>-->
+<!--                                <li class="menu-item"><a href="#">Menu 02</a></li>-->
+<!--                                <li class="menu-item"><a href="#">Menu 03</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="menu-item current-menu-item"><a href="about.html">About us</a></li>-->
+                    </ul>
+                    <!-- End Navigation Menu -->
+                    
+                    <div class="clear"></div>
+                    
+            </div>
+			</div>
+        </div>
+    <div class="clear"></div> 
+    </div>
+    <div class="spacing-30"></div>
+    <!-- End Header -->  
+    
+    
+    <!-- Start Main Container -->
+    <div class="container zerogrid">
+        
+    <div class="col-full page-conainer">
+	<div class="wrap-col">
+    <div class="post-margin">
+    <h4 class="page-title"> Страница авторизованного пользователя {{user}}</h4>
+    <h5 class="post-title"> Ваша почта: {{request.user.email}} </h5>
+    <!-- Start Entry -->
+    <hr>
+
+     <ul class="post-social">
+        <li><a href="{% url 'account_logout' %}" target="_blank">Выйти из аккаунта</a></li>
+     </ul>
+
+    <hr>
+    {% if is_authors %}
+        <h5 class="post-title"> Мои объявления: </h5>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Заголовок статьи</td>
+                        <td>Содержание</td>
+                        <td>Редактирование/Удаление</td>
+                    </tr>
+                    </thead>
+
+                    {% for ads in page_obj_ad %}
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="{% url 'ad_blog' ads.id %}"> {{ads.head}}</a>
+                            </td>
+                            <td>
+                                {{ads.text|safe|linebreaks|truncatewords:50}}
+                            </td>
+                            <td >
+                                <a href="{% url 'ad_update' ads.id %}"><u> Редактировать </u></a> /
+                                <a href="{% url 'ad_delete' ads.id %}"><u> Удалить </u></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+       <!-- Start Pagination -->
+            <div class="spacing-20"></div>
+                {% if page_obj_ad.has_other_pages %}
+
+                    <ul class="pagination">
+                        {% if page_obj_ad.has_previous %}
+                            <li>
+                                <a href="?page_ad={{ page_obj_ad.previous_page_number }}">&lt;</a>
+                            </li>
+                        {% endif %}
+                        {% for p in paginator_ad.page_range %}
+                            {% if page_obj_ad.number == p %}
+                                <li class='current'>{{ p }}</li>
+                            {% elif p >= page_obj_ad.number|add:-2 and p <= page_obj_ad.number|add:2  %}
+                                <li>
+                                    <a href="?page_ad={{ p }}">{{ p }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj_ad.has_next %}
+                            <li>
+                                <a href="?page_ad={{ page_obj_ad.next_page_number }}">&gt;</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+
+                {% endif %}
+        <!-- End Pagination -->
+        <hr>
+        <h5 class="post-title"> Отзывы на объявления: </h5>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Заголовок статьи</td>
+                        <td>Содержание отклика</td>
+                        <td>Дата отклика</td>
+                        <td>Отклик</td>
+                    </tr>
+                     <form method="get">
+                     <tr>
+                        <td>{{ reaction_filter.form.ads }}</td>
+                        <td>{{ reaction_filter.form.text }}</td>
+                        <td>{{ reaction_filter.form.dateCreation }}</td>
+                        <td>{{ reaction_filter.form.status }}  <input type="submit" /></td>
+                    </tr>
+                    </form>
+                    </thead>
+                    <tbody>
+                        {% for react in page_obj_react %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'ad_blog' react.ads.id %}"> {{ react.ads.head }}</a>
+                            </td>
+                            <td>
+                              {{ react.text|truncatewords:50 }}
+                            </td>
+                            <td >
+                               {{ react.dateCreation|date:'d M Y h:m' }}
+                            </td>
+                            <td>
+                                {% if react.status %}
+                                    <div class="status-accept">Принято</div>
+                                {% else %}
+                                    <ul class="post-social">
+                                        <li><a href="{% url 'accept' react.id %}" target="_blank">Принять</a></li>
+                                        <li><a href="{% url 'reject' react.id %}" target="_blank">Удалить</a></li>
+                                    </ul>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if page_obj_react.has_other_pages %}
+            <!-- Start Pagination -->
+                <div class="spacing-20"></div>
+                    <ul class="pagination">
+                        {% if page_obj_react.has_previous %}
+                            <li>
+                                <a href="?page_re={{ page_obj_react.previous_page_number }}">&lt;</a>
+                            </li>
+                        {% endif %}
+                        {% for p in paginator_react.page_range %}
+                            {% if page_obj_react.number == p %}
+                                <li class='current'>{{ p }}</li>
+                            {% elif p >= page_obj_react.number|add:-2 and p <= page_obj_react.number|add:2  %}
+                                <li>
+                                    <a href="?page_re={{ p }}">{{ p }}</a>
+                                </li>
+                             {% endif %}
+                     {% endfor %}
+
+                    {% if page_obj_react.has_next %}
+                        <li>
+                            <a href="?page_re={{ page_obj_react.next_page_number }}">&gt;</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+            <!-- End Pagination -->
+                {% endif %}
+                <div class="clear"></div>
+
+    {% else %}
+        <h5 class="post-title"> Нет моих объявлений </h5>
+    {% endif %}
+        <hr>
+        <h5 class="post-title"> Мои реакции на объявления: </h5>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Заголовок статьи</td>
+                        <td>Содержание отклика</td>
+                        <td>Дата отклика</td>
+                        <td>Отклик</td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for my_react in page_obj_my_react %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'ad_blog' my_react.ads.id %}"> {{ my_react.ads.head }}</a>
+                            </td>
+                            <td>
+                              {{ my_react.text|truncatewords:50 }}
+                            </td>
+                            <td >
+                               {{ my_react.dateCreation|date:'d M Y h:m' }}
+                            </td>
+                            <td>
+                                <ul class="post-social">
+                                    {% if my_react.status %}
+                                         <div class="status-accept">Принято</div>
+                                    {% else %}
+                                        <li><a href="{% url 'reject' my_react.id %}" target="_blank">Удалить</a></li>
+                                    {% endif %}
+                                </ul>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if page_obj_my_react.has_other_pages %}
+            <!-- Start Pagination -->
+                <div class="spacing-20"></div>
+                    <ul class="pagination">
+                        {% if page_obj_my_react.has_previous %}
+                            <li>
+                                <a href="?page_mr={{ page_obj_my_react.previous_page_number }}">&lt;</a>
+                            </li>
+                        {% endif %}
+                        {% for p in paginator_my_react.page_range %}
+                            {% if page_obj_my_react.number == p %}
+                                <li class="current">{{ p }}</li>
+                            {% elif p >= page_obj_my_react.number|add:-2 and p <= page_obj_my_react.number|add:2  %}
+                                <li>
+                                    <a href="?page_mr={{ p }}">{{ p }}</a>
+                                </li>
+                             {% endif %}
+                     {% endfor %}
+
+                    {% if page_obj_my_react.has_next %}
+                        <li>
+                            <a href="?page_mr={{ page_obj_my_react.next_page_number }}">&gt;</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+            <!-- End Pagination -->
+                {% endif %}
+
+<div class="symple-clear-floats"></div>
+    <!-- End Entry -->
+    
+    </div>
+	</div>
+    </div>
+    
+    <div class="clear"></div>
+        </div>
+	<!-- End Main Container -->
+	
+	
+    
+    
+    <!-- Start Footer -->
+    <div class="spacing-30"></div>
+    <div class="container zerogrid">
+        <div id="footer-container" class="col-full">
+        <div class="wrap-col">	
+            <!-- Footer Copyright -->
+            <p>Copyrigh &copy; 2023 MMORPG advertisements.</p>
+            <!-- End Footer Copyright -->
+            
+            <!-- Footer Logo -->
+			<img src="{% static 'images/footer-logo.png' %}" id="footer-logo" />
+            <!-- End Footer Logo -->
+        
+        <div class="clear"></div>
+		</div>
+        </div>
+    </div>
+    <!-- End Footer -->
+
+
+</body>
+</html>
