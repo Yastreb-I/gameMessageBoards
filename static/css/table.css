@@ -1,0 +1,53 @@
+.table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+}
+.table thead th {
+	padding: 10px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: left;
+	color: #444441;
+	border-top: 2px solid #716561;
+	border-bottom: 2px solid #716561;
+}
+.table tbody td {
+	padding: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #444441;
+	border-top: 1px solid #716561;
+}
+
+.status-accept {
+    background: #2ecc71;color: #FFFFFF;
+    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+.paging-current {
+    background: #2ecc71;
+    color: #FFFFFF;
+    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.post-socials {
+     float:right;
+     float:left; font-size:14px;
+     padding-left:16px;
+     padding-right:16px;
+     background:#343434;
+     color:#FFFFFF;
+     padding:10px;
+     padding-left:13px;
+     padding-right:13px;
+     display:inline-block
+}
+
+.post-socials a:hover{ background:#2980b9; }
