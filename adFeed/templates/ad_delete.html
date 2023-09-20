@@ -1,0 +1,41 @@
+<!--  наследуемся от шаблона default.html-->
+{% extends 'default.html' %}
+
+{% block title %}
+Удаление объявления
+{% endblock title %}
+
+{% block content %}
+	<!-- Comments -->
+    <div class="comment-container">
+        <h6 id="comment-header">Вы действительно хотите удалить это объявление?</h6>
+
+        <ul class="comment-list"> </ul>
+
+        <!-- Post preview-->
+
+
+        <!-- Comment Form -->
+        <div class="commen-form">
+            <div id="respond" class="comment-respond">
+                 <p class="comment-notes">{{advertisement.head}}</p>
+                 <p class="comment-notes">{{advertisement.preview|striptags}}</p>
+                <form action="" method="post" id="comment-form-container" class="comment-form">
+                    <p class="comment-notes"></p>
+                    {% csrf_token %}
+                    <p class="form-allowed-tags"></p>
+                    <p class="form-submit">
+                        <input name="submit" type="submit" id="comment-submit" value="Удалить" />
+                    </p>
+			    </form>
+
+                <!-- #respond -->
+			            <div class="clear"></div>
+
+            </div>
+        </div>
+            <!-- End Comment Form -->
+    </div>
+
+
+{% endblock content %}

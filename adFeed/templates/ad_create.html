@@ -1,0 +1,52 @@
+
+{% extends 'default.html' %}
+
+{% block title %}
+Создание поста
+{% endblock title %}
+
+{% block content %}
+    	<!-- Comments -->
+    <div class="comment-container">
+        <h6 id="comment-header">Создание поста</h6>
+
+        <ul class="comment-list"> </ul>
+
+
+        <!-- Comment Form -->
+        <div class="commen-form">
+            <div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">
+                    <small>
+                        <a rel="nofollow" id="cancel-comment-reply-link" href="#" style="display:none;">Cancel Reply</a>
+                    </small>
+                </h3>
+
+                <form action="" method="post" id="comment-form-container" class="comment-form">
+                    <p class="comment-notes"></p>
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+
+<!--                    <input type="text" name="author" placeholder="Enter Name" class="comment-name"  />-->
+<!--                    <input type="text" name="email" placeholder="Enter Email" class="comment-email"  />-->
+<!--                    <input type="text" name="url" placeholder="Enter URL" class="comment-url" />-->
+<!--                    <textarea name="comment" placeholder="Enter Message Here" class="comment-text-area"></textarea>-->
+                    <p class="form-allowed-tags"></p>
+                    <p class="form-submit">
+                        <input name="submit" type="submit" id="comment-submit" value="Отправить объявление" />
+<!--                        <input type='hidden' name='comment_post_ID' value='49' id='comment_post_ID' />-->
+<!--                        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />-->
+                    </p>
+			    </form>
+
+                <!-- #respond -->
+			            <div class="clear"></div>
+
+            </div>
+        </div>
+            <!-- End Comment Form -->
+    </div>
+
+
+{% endblock content %}

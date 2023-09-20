@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Здравствуй, {{user}}.</h1>
+    <h3> Здесь собраны все объявления вышедшие на сайте
+        <a style="margin-top: 10px;margin-bottom: 20px;" href="{{ url_site }}">MMORPG</a>
+    за последнюю неделю:
+    </h3>
+        {% if ads %} <!-- Если есть новости, то выводим их -->
+            <h5 class="post-title"> Посты за неделю: </h5>
+                <div class="post-preview">
+                    <table>
+                        <tr>
+                            <td>
+                                Тема
+                            </td>
+                            <td>
+                                Заголовок
+                            </td>
+                        </tr>
+
+                {% for ad in ads %}
+                    <tr>
+                        <td>
+                             {{ad.get_category_display}}
+                        </td>
+                        <td>
+                           <a style="margin-top: 10px;margin-bottom: 20px;"
+                           href="{{url_site}}{{ ad.id }}">
+                            {{ad.head}}</a>
+                        </td>
+                   </tr>
+                 {% endfor %}
+                    </table>
+        {% else %}
+            <h3>За неделю новых статьей по вашим темам не выходило!</h3>
+        {% endif %}
+
+        <p>Приятных покупок!</p>
+        <hr>
+        <p>С уважением,</p><br>
+        <p>Команда сайта</p>
+
+    </body>
+</html>
